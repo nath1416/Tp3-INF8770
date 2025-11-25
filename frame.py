@@ -10,11 +10,14 @@ def main(video_path: str):
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     current_frame = 0
     saved_frames = []
+    fast_step = 10  # Number of frames to skip when using fast navigation
     
     print(f"Total frames: {total_frames}")
     print("Controls:")
     print("  Left Arrow  - Previous frame")
     print("  Right Arrow - Next frame")
+    print("  Page Up     - Jump 10 frames back")
+    print("  Page Down   - Jump 10 frames forward")
     print("  Space       - Save current frame number")
     print("  Q / ESC     - Quit")
     
@@ -49,6 +52,10 @@ def main(video_path: str):
             current_frame = max(0, current_frame - 1)
         elif key == 83 or key == 3:  # Right arrow
             current_frame = min(total_frames - 1, current_frame + 1)
+        elif key == 85 or key == 0:  # Page Up
+            current_frame = max(0, current_frame - fast_step)
+        elif key == 86 or key == 1:  # Page Down
+            current_frame = min(total_frames - 1, current_frame + fast_step)
     
     cap.release()
     cv2.destroyAllWindows()
