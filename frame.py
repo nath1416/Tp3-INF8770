@@ -66,3 +66,4 @@ if __name__ == "__main__":
     
     video_path = sys.argv[1]
     saved = main(video_path)
+    print(saved)
